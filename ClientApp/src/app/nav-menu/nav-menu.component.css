@@ -136,3 +136,12 @@ body {
   margin:0px;
   padding: 0px;
 }
+
+.modal-header{
+   background-color:#2e353d;
+}
+
+.modal-title{
+ 
+  color:azure;
+}
