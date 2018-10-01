@@ -135,7 +135,7 @@
         </div>
         <br /><br />
 
-        <div class="title" style="font-size:17px;">Your Balance</div>
+        <div class="title" style="font-size:17px; padding:5px;">Your Balance</div>
         <div class="listGrp" >
           <div style="width:100%;">
             <div *ngIf="this.TotalBalance.amount<0" style="color:forestgreen">
@@ -153,7 +153,7 @@
           </div>
         </div>
         <div>
-          <div class="title" style="font-size:17px;">Details</div>
+          <div class="title" style="font-size:17px; padding:5px;">Details</div>
           <ul *ngFor='let detail of details'>
             <li><small>{{detail}}</small></li>
           </ul>

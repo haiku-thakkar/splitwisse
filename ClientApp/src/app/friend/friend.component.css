@@ -40,6 +40,7 @@ li.list-group-item:hover,li.list-group-item:active{
 .title{
   font-size:20px;
   color:azure;
+  background-color:#2e353d;
 }
 
 .billcontent{
