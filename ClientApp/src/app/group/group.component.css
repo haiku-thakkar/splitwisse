@@ -1,0 +1,173 @@
+sub{
+      bottom: -1em;
+    margin-left: -19px;
+}
+
+li.list-group-item:hover,li.list-group-item:active{
+  background-color:#2e353d;
+}
+
+.input-group{
+  margin-bottom:5px;
+}
+
+.list-group-item{
+  padding:5px 12px;
+}
+
+.list-group{margin-bottom:2px;}
+
+#grpSetting{
+  background-color:white;
+  padding-left:20px;
+  width:230px;
+  padding-top:10px;
+  padding-bottom:10px;
+ 
+}
+
+
+.modal-header{
+  background-color:#2e353d;
+  border-radius:4px;
+  color:white;
+}
+
+#payerBody{
+  height:300px;
+  overflow-y:scroll;
+}
+
+.dot {
+  height: 19px;
+  width: 17px;
+  border:none;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+
+.billcontent{
+  width:100%;
+  float:left;
+  padding-left:25px;
+  line-height:22px;
+  margin-bottom:10px;
+  border:1px solid #2e353d;
+  border-color:#2e353d;
+  box-shadow:0 1px 1px rgba(0,0,0,.05);
+  padding-bottom:17px;
+}
+
+hr{
+  width:500px;
+  margin-left:0px;
+  margin:8px 0px;
+ border:1px solid #2e353d;
+}
+
+.content{
+  width:100%;
+  float:left;
+  text-align:center;
+  height:60px;
+  line-height:25px;
+  padding-top:13px;
+  background-color:white;
+  margin-bottom:8px;
+  border-bottom:1px solid transparent;
+  border-color:#ddd;
+  box-shadow:0 1px 1px rgba(0,0,0,.05);
+}
+
+#btnSmall{
+  padding:11px 16px;
+  background-color:#0c1116;
+  margin-left:5px;
+}
+
+.col-sm-9{
+  border-width:2px;  
+  border-style:none solid;
+  border-color:gray;
+   min-height: 530px;
+  height:auto;
+}
+
+.title{
+  font-size:20px;
+  color:azure;
+}
+
+.cal{
+  font-size:20px;
+  color:#6f8091;
+  float:left;
+  height:35px;
+  width:47px;
+  line-height:32px;
+  margin-right:12px;
+  border: 1px solid #6f8091;
+  border-radius: 5px;
+}
+
+#mybtn{
+  margin-left:10px;
+  margin-top:-29px;
+  float:right;
+  height:33px;
+  text-align:center;
+  background-color:#0c1116;
+  color:white;
+}
+
+.btn:hover{
+  background-color: #ccc;
+    color: black;
+}
+
+.panel-heading{
+  height:50px;
+  font-weight:bold;
+  background-color:#2e353d;
+}
+
+.listGrp{
+  padding:8px 8px;
+  line-height:15px;
+  background-color:white;
+  margin:8px 8px;
+   border-radius: 15px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+     border-spacing: 15px;
+}
+
+.transaction{
+  width:100%;
+  float:left;
+  height:37px;
+  line-height:36px;
+  margin:3px 0px;
+  border-color:#ddd;
+  box-shadow:0 1px 1px rgba(0,0,0,.05);
+  border:1px solid #d6d6d6;
+  border-color:#ddd;
+}
+
+#tr{
+  border-color:#2e353d;
+  color:#2e353d;
+  padding-left: 8px;
+    font-weight: bold;
+    border: 4px solid;
+    border-style: none none none solid;
+}

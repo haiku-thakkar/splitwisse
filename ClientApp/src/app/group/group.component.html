@@ -1,0 +1,190 @@
+<div>
+  <div>
+    <div class="col-sm-9">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="title">{{group?.groupName}}</div>
+          <button type="button" id="mybtn" class="btn btn-default" data-toggle="modal" data-target="#billModal">Add Bill</button>
+          <div class="modal fade" id="billModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" #closebill>&times;</button>
+                  <h4 class="modal-title">Add Bill with {{group?.groupName}}</h4>
+                </div>
+                <div class="modal-body">
+                  <form #myForm="ngForm">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                      <input id="billName" type="text" class="form-control" name="billName" placeholder="Description" [(ngModel)]="AddBillModel.billName" required>
+                    </div>
+                    <div class="input-group">
+                      <span class="input-group-addon" style="font-size:18px;">₹</span>
+                      <input id="amount" type="number" class="form-control" name="amount" placeholder="Amount" [(ngModel)]="totalAmount" required>
+                    </div>
+                    <div class="input-group">
+                      <label>Payers:</label>
+                      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#payerModal" id="payers" style="border-radius:10px;width:90px;margin-left:8px;">Payers</button>
+                    </div>
+                    <div class="input-group">
+                      <button type="button" class="btn btn-primary" (click)="saveBill()" [disabled]="!myForm.valid" style="margin-top:10px;margin-left:210px;">Save</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="payerModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content" style="left:310px;">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Choose Payers</h4>
+                </div>
+                <div class="modal-body" id="payerBody">
+                  <ul class="list-group" *ngFor='let member of group.members'>
+                    <li class="list-group-item" (click)="addSinglePayer(member.id)">{{member.name}}</li>
+                  </ul>
+                  <button type="button" class="btn btn-primary btn-xs" (click)="showPayer()" style="margin-top:5px;margin-bottom:5px;">Multiple Payers</button>
+
+                  <div *ngIf="showMultiplePayer">
+                    <ul class="list-group" *ngFor='let member of group.members'>
+                      <li class="list-group-item">{{member.name}}</li>
+
+                      <li class="list-group-item">
+                        <span class="input-group-addon" style="font-size:18px;">₹</span>
+                        <input id="amount" type="number" class="form-control" name="amount" placeholder="Amount" #amount>
+                      </li>
+                      <li> <a role="button" style="float:right;" (click)="addMultiplePayer(member.id,amount.value)">add</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a role="button"   id="tr">Bills</a>
+      <div *ngFor='let bill of groupBills'>
+        <div>
+          <div class="content">
+            <div style="padding-left:20px;"><a class="cal">{{bill.createdDate | date: 'd'}}<small style="font-size:54%;">{{bill.createdDate | date: 'MMM'}}</small></a></div>
+            <div style="text-align:left;padding-left:20px;line-height:37px;">
+              <a role="button" (click)="show(bill.billId)" class="title">{{bill.billName}}</a>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="check(bill.billId)">
+          <div class="billcontent">
+            <h3>{{bill.billName}}</h3>
+            <h4>{{bill.amount | currency : 'INR' }}</h4>
+            <small>Added by:{{bill.creatorName}}</small><br />
+            <small>Date:{{bill.createdDate | date: 'fullDate'}}</small><br />
+            <small>GroupName:{{bill.groupName}}</small>
+            <hr />
+            <small *ngFor='let payer of bill.payers'>{{payer.name}} paid {{payer.amount | currency : 'INR' }}<br /></small>
+            <hr />
+            <small *ngFor='let member of bill.billMembers'>{{member.name}} owes {{member.amount | currency : 'INR' }}<br /></small>
+          </div>
+        </div>
+      </div>
+      <div>
+        <a role="button" href="#Trans" data-toggle="collapse" id="tr">View Transactions</a>
+      </div>
+      <div id="Trans" class="collapse">
+        <div *ngIf="transactions.length==0">
+          <div class="transaction" style="padding-left:20px;">
+            No Transactions
+          </div>
+        </div>
+        <div *ngFor='let trans of transactions'>
+          <div class="transaction">
+            <div style="padding-left:20px;"><a class="cal" style="height:30px; margin-top:2px;">{{trans.createdDate | date: 'd'}}<small style="font-size:54%;">{{trans.createdDate | date: 'MMM'}}</small></a></div>
+            {{trans.payer.name}} paid {{trans.receiver.name}} {{trans.paidAmount |currency : 'INR' }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="btn-group btn-group-xs">
+        <button type="button" id="btnSmall" class="btn btn-primary" (click)="showBalanceTab()"><span class="glyphicon glyphicon-th-list"></span></button>
+        <button type="button" id="btnSmall" class="btn btn-primary" (click)="showSetting()"><span class="glyphicon glyphicon-cog"></span></button>
+        <button type="button" id="btnSmall" (click)="deleteGroup()" class="btn btn-primary"><span class="glyphicon glyphicon-trash"></span></button>
+      </div>
+      <br /><br />
+      <div id="grpSetting" *ngIf="showSettingData">
+        <form>
+          <label for="groupName">Group name:</label><br>
+          <input type="text" name="groupName" [(ngModel)]="group.groupName">
+          <br><br>
+          <label>Group Members:</label>
+          <div *ngFor='let member of groupMember' type="none">
+            <div>
+              <button class="dot" (click)="removeMember(member.id)">
+                <span class="glyphicon glyphicon-remove-sign" style="top:0px;left:-5px;"></span>
+              </button>
+              <label>{{member.name}}</label>
+              <span *ngIf="checkMember(member.id)" style="padding-left:20px;color:#ff6f56;"><small>removed</small></span>
+            </div>
+          </div>
+          <br />
+          <label>Add Group Members:</label>
+          <div *ngFor='let member of AddGroupMembers' type="none">
+            <div>
+              <button class="dot" (click)="AddMember(member.id)">
+                <span class="glyphicon glyphicon-plus-sign" style="top:-1px;left:-5px;"></span>
+              </button>
+              <label>{{member.name}}</label>
+              <span *ngIf="checkAddedMember(member.id)" style="padding-left:20px;color:#2e353d;"><small>added</small></span>
+            </div>
+          </div>
+          <br />
+          <button type="submit" class="btn btn-primary" (click)="onSubmit()" style="background-color:#2e353d;">Save</button>
+          <button class="btn btn-primary" (click)="onCancel()" style="background-color:#2e353d;">Cancel</button>
+        </form>
+      </div>
+      <div *ngIf="grpBalanceShow">
+        <div class="title" style="color:black">Group Balance</div>
+        <div class="listGrp" *ngFor='let member of TotalBalance'>
+          <div style="width:100%;">
+            <label style="width:100%;">{{member.name}}</label>
+            <small style="width:100%;" *ngIf="member.balance>0">owes {{member.balance | currency : 'INR' }}</small>
+            <small style="width:100%;" *ngIf="member.balance<0">gets back {{-member.balance | currency : 'INR' }}</small>
+            <small style="width:100%;color:black" *ngIf="member.balance==0">settled up</small>
+          </div>
+        </div>
+        <div><a role="button" data-toggle="modal" data-target="#DetailsModal">Details</a></div>
+      </div>
+      <div class="modal fade" id="DetailsModal" role="dialog">
+        <div class="modal-dialog" style="top:90px;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" style="color:white">&times;</button>
+              <h4 class="modal-title">Group Balances</h4>
+            </div>
+            <div class="modal-body">              
+              <table style="width:100%"  >
+                <tr *ngFor='let member of TotalBalance'>
+                  <td >
+                    <div style="width:100%;margin-bottom:8px;">
+                      <div style="width:100%;">{{member.name}}</div>
+                      <small style="width:100%;color:red" *ngIf="member.balance>0">owes {{member.balance | currency : 'INR' }}</small>
+                      <small style="width:100%;color:forestgreen" *ngIf="member.balance<0">gets back {{-member.balance | currency : 'INR' }}</small>
+                      <small style="width:100%;color:black" *ngIf="member.balance==0">settled up</small>
+                    </div>
+                  </td>
+                  <td >
+                    <div *ngFor='let detail of details'> 
+                      <ul *ngIf="member.id==detail.id">
+                        <li>{{detail.name}}</li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>                
+              </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

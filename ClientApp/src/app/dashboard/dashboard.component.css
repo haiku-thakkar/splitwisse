@@ -1,0 +1,95 @@
+#tags{
+  padding:3px 3px;
+  border:1px solid black;
+  border-radius:10px;
+  margin-left:5px;
+}
+
+.input-group{
+  margin-bottom:5px;
+}
+
+.col-sm-9{
+  border-width:2px;  
+  border-style:none solid;
+  border-color:gray;
+  min-height: 530px;
+  height: auto;
+  
+}
+
+.title{  
+  font-size:20px;
+}
+
+#mybtn{
+  margin-left:10px;
+  margin-top:-29px;
+  float:right;
+  height:33px;
+  text-align:center;
+  background-color: #0c1116;
+  color:white;
+}
+
+.btn:hover{
+  background-color: #ccc;
+    color: black;
+}
+
+.panel-heading{
+  height:50px;
+  font-weight:bold;
+  background-color:#2e353d;
+  color:azure;
+}
+
+.content{
+  width:225px;
+  float:left;
+  text-align:center;
+  height:70px;
+  line-height:22px;
+  padding-top:13px;
+  background-color:#c2cfe8;
+  border:1px solid transparent;
+  border-color:#ddd;
+  box-shadow:0 1px 1px rgba(0,0,0,.05);
+}
+
+li.list-group-item:hover,li.list-group-item:active{
+  background-color:lightblue;
+}
+
+.list-group-item{
+  padding:5px 12px;
+  background-color: #ccd7e2
+}
+
+.list-group{margin-bottom:2px;}
+
+.modal-header{
+  background-color:#2e353d;
+  border-radius:4px;
+  color:white;
+}
+
+.dashBody{
+    width: 50%;
+    float: left;
+    padding: 8px 2px;
+}
+
+.dashBodyTitle{
+  width: 100%;
+    background-color: #2e353d;
+    color:azure;
+    height: 30px;
+    line-height: 30px;
+    padding: 0px 12px;
+}
+
+#payerBody{
+  height:300px;
+  overflow-y:scroll;
+}

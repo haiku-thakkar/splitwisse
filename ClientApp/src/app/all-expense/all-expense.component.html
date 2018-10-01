@@ -1,0 +1,77 @@
+<div>
+  <div>
+    <div class="col-sm-9">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="title">All Expenses</div>
+        </div>
+      </div>
+      <div>
+        <a role="button" id="tr" href="#billData" data-toggle="collapse">Bills</a>
+        <div id="billData" class="collapse">
+          <div *ngFor="let bill of Bills">
+            <div>
+              <div class="content">
+                <div style="padding-left:20px;"><a class="cal">{{bill.createdDate | date: 'd'}}<small style="font-size:54%;">{{bill.createdDate | date: 'MMM'}}</small></a></div>
+                <div style="text-align:left;padding-left:20px;line-height:37px;">
+                  <a role="button" href="#{{bill.billId}}" data-toggle="collapse" class="title">{{bill.billName}}</a>
+                </div>
+              </div>
+            </div>
+            <div id="{{bill.billId}}" class="collapse">
+              <div class="billcontent">
+                <h3>{{bill.billName}}</h3>
+                <h4>₹{{bill.amount}}</h4>
+                <small>Added by:{{bill.creatorName}}</small><br />
+                <small>Date:{{bill.createdDate | date: 'fullDate'}}</small><br />
+                <small>GroupName:{{bill.groupName}}</small>
+                <hr />
+                <small *ngFor='let payer of bill.payers'>{{payer.name}} paid ₹{{payer.amount}}<br /></small>
+                <hr />
+                <small *ngFor='let member of bill.billMembers'>{{member.name}} owes ₹{{member.amount}}<br /></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a role="button" href="#Trans" data-toggle="collapse" id="tr">Transactions</a>
+        </div>
+        <div id="Trans" class="collapse">
+          <div *ngIf="transactions.length==0">
+            <div class="transaction" style="padding-left:20px;">
+              No Transactions
+            </div>
+          </div>
+          <div *ngFor='let trans of transactions'>
+            <div class="transaction">
+              <div style="padding-left:20px;"><a class="cal" style="height:30px; margin-top:2px;">{{trans.createdDate | date: 'd'}}<small style="font-size:54%;">{{trans.createdDate | date: 'MMM'}}</small></a></div>
+              <div>{{trans.payer.name}} paid {{trans.receiver.name}} ₹{{trans.paidAmount}} in {{trans.groupName}} </div>
+            </div>
+          </div>
+        </div>
+      </div>     
+      <br />
+      <br />
+    </div>
+    <div class="col-sm-3"><div class="panel panel-heading">
+  <div class="title" style="font-size:16px;">Your Total Balance</div>
+</div>
+      <div class="listGrp">
+        <div style="width:100%;">
+          <div *ngIf="this.Total<0" style="color:forestgreen">
+            <label style="width:100%;"> You are owed </label>
+            <label style="font-size:25px;">{{-this.Total | currency : 'INR' :'symbol-narrow'}}</label>
+          </div>
+          <div *ngIf="this.Total>0" style="color:red">
+            <label style="width:100%;">You owe </label>
+            <label style="font-size:25px;">{{this.Total  | currency : 'INR' :'symbol-narrow'}}</label>
+          </div>
+          <div *ngIf="this.Total==0" style="color:#2e353d">
+            <label style="width:100%;">You are all settled up</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

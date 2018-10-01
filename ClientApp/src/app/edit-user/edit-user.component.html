@@ -1,0 +1,26 @@
+
+<div class="container">
+  <div class="col-md-9">
+    <div id="logbox">
+      <form #form="ngForm" novalidate (ngSubmit)="onSubmit(form.value)" class="form">
+        <h1>Edit User</h1>
+
+        <input name="userName" [(ngModel)]="model.userName" type="text" pattern="^[\w]{3,16}$" autofocus="autofocus" required="required" class="input pass" />
+
+        <input name="password" [(ngModel)]="model.password" type="password" required="required" class="input pass" />
+
+        <input name="email" [(ngModel)]="model.email" type="email" class="input pass" />
+
+        <button type="submit" class="inputButton">
+          Update
+        </button>
+
+        <button (click)="btnCancel($event)" class="inputButton">
+          Cancel
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>
+

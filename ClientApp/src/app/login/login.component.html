@@ -1,0 +1,33 @@
+<div>
+  <div>
+    <nav class="navbar navbar-default" id="header">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">SplitWise</a>
+        </div>
+        <ul class="nav navbar-nav"></ul>
+      </div>
+    </nav>
+  </div>
+  <div class="container">
+    <div class="col-md-6">
+      <div id="logbox">
+        <form #form="ngForm" novalidate (ngSubmit)="onSubmit(form.value)" class="form">
+          <h1>Account Login</h1>
+
+          <input name="email" type="email" [(ngModel)]="model.email" placeholder="enter your email" class="input pass" />
+
+          <input name="password" [(ngModel)]="model.password" type="password" placeholder="enter your password" required="required" class="input pass" />
+
+          <button type="submit" class="inputButton">
+            Sign me in!
+          </button>
+
+          <div class="text-center">
+            <a [routerLink]="['/register']" id="">create an account</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+ </div>

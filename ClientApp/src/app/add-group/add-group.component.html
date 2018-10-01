@@ -1,0 +1,35 @@
+
+<div class="col-sm-9">
+  <form #myForm="ngForm" novalidate class="form">
+    <h1>Create Group</h1><br/>    
+    <div class="form-group row">
+      <div>
+        <label for="groupName">Group Name:</label>
+        <input type="text" class="form-control" placeholder="Group Name" [(ngModel)]="groupName" name="groupName" required>
+      </div>
+    </div>
+    <label>Group Members</label><br />
+    <div class="form-group row">
+      <div>
+        <select #select class="form-control" [(ngModel)]="current" (change)="logDropdown(select.value)" name="select">
+          <option *ngFor="let item of friends" [value]="item.userId">{{item.userName}}</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <div>
+        <button class="inputButton" (click)="clear()">Clear</button>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div>        
+        <textarea class="form-control" rows="3" disabled>{{log}}</textarea>
+      </div>
+    </div>
+
+    <button type="submit" class="inputButton" (click)="onSubmit()">Save</button>
+
+  </form>
+</div>

@@ -1,0 +1,31 @@
+<div>
+  <div>
+    <nav id="header">
+      <div class="container-fluid">
+        
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-user"></span>
+            {{userData?.userName}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a [routerLink]="['/',userId,'editUser']">Account Setting</a></li>
+            <li><a role="button" (click)="logout()">LogOut</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class='container'>
+    <div>
+      <div class='col-sm-3'>
+        <app-nav-menu [UserId]="userId"></app-nav-menu>
+      </div>
+      <div class='col-sm-9 body-content'>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="nav-side-menu">
+  <div class="brand">Split Wise</div>
+  <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+  <div class="menu-list">
+
+    <ul id="menu-content" class="menu-content collapse out">
+      <li><a [routerLink]="['home']"><i class="fa fa-dashboard fa-lg"></i> Dashboard</a></li>
+      <li><a [routerLink]="['allExpense']"><i class="	fa fa-inr fa-lg"></i> All Expenses</a></li>
+
+      <li data-toggle="collapse" data-target="#groups" class="collapsed">
+        <a [routerLink]="['GroupAdd']"><i class="fa fa-users fa-lg"></i> Group <span class="arrow"></span></a>
+      </li>
+
+      <ul class="sub-menu collapse" type="none" id="groups">
+        <li *ngFor='let group of groups'>
+          <a [routerLink]="['group/',group.groupId]"><span class="fa fa-angle-right"></span>{{group.groupName}}</a>
+        </li>
+      </ul>
+
+      <li data-toggle="madal" data-target="#FriendModal" >
+        <a role="button"><span class=" fa fa-plus fa-lg"></span>&nbsp;Friends </a>
+      </li>
+
+      <div class="modal fade" id="FriendModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" #close>&times;</button>
+              <h4 class="modal-title">Add Friend</h4>
+            </div>
+            <div class="modal-body">
+              <form #myForm="ngForm">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                  <input id="userName" type="text" class="form-control" name="userName" placeholder="userName" [(ngModel)]="FriendName" required />
+                </div>
+                <br/>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                  <input id="email" type="email" class="form-control" name="email" placeholder="Email" [(ngModel)]="FriendEmail" required />
+                </div>
+                <div class="input-group">
+                  <button type="button" (click)="addFriend()" data-dismiss="modal" style="background-color:#0c1116" >Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <li>
+        <ul type="none" class="vertical-menu">
+          <li *ngFor="let friend of friends">
+            <a [routerLink]="['friend/',friend.userId]"  routerLinkActive="router-link-active"><span class="fa fa-user"></span>&nbsp;{{friend.userName}}</a>
+          </li>
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+</div>
